@@ -4,6 +4,7 @@ import hexorcist
 def test_to_decimal():
     assert hexorcist.to_decimal('8',8) == 8
     assert hexorcist.to_decimal('ZA', 36) == 1270
+    assert hexorcist.to_decimal('101011110111101010111111001',2) == 92001785
 
 def test_from_decimal():
     assert hexorcist.from_decimal(918395923509,16) == 'D5D4A9AC35'

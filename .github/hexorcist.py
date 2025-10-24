@@ -1,6 +1,6 @@
 import time
 import sys
-import string
+#import string
 
 alphanumeric = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -11,7 +11,7 @@ def to_decimal(number_string, original_base):
     total = 0
 
     for c in range(len(number_string)):
-        total += alphanumeric.index(number_string[-(c+1)])*(original_base**c)
+        total += alphanumeric.index(number_string[-(c+1)])*(int(original_base)**c)
     
     return total
 
@@ -22,9 +22,9 @@ def from_decimal(decimal_number, target_base):
     
     converted = ''
 
-    while decimal_number > target_base:
-        converted = str(alphanumeric[decimal_number % target_base]) + converted
-        decimal_number = decimal_number // target_base
+    while decimal_number > int(target_base):
+        converted = str(alphanumeric[decimal_number % int(target_base)]) + converted
+        decimal_number = decimal_number // int(target_base)
     
     converted = str(alphanumeric[decimal_number]) + converted
     return converted
@@ -32,9 +32,9 @@ def from_decimal(decimal_number, target_base):
 
 def base_input_validation(base):
     if not base.isnumeric():
-        return base_input_validation(input("Please make sure your base is a number"))
+        return base_input_validation(input("Please make sure your base is a positive integer "))
     elif int(base) > 36 or int(base) < 2:
-        return base_input_validation(input("Please make sure your base from 2-36(inclusive)"))
+        return base_input_validation(input("Please make sure your base from 2-36(inclusive) "))
     return base
     
 
@@ -54,10 +54,23 @@ if __name__ == '__main__':
 
         original_base = base_input_validation(input("Alright, well what base is it in?(2-36) ")).upper()
         original_number = number_input_validation(input("Well get on with it, what's your number? "),original_base)
-        for c in '\nPython scripting your results\n':
-            sys.stdout.write(c)
-            sys.stdout.flush()
-            time.sleep(0.1)
+        target_base = base_input_validation(input("What base would you like to convert to?(2-36) "))
+        if target_base == original_base:
+            print(f"\nYour original number {original_number} in base {original_base} is {original_number} in base {target_base}")
+        else:
+            for c in '\nPython scripting your results\n':
+                sys.stdout.write(c)
+                sys.stdout.flush()
+                time.sleep(0.1)
 
-        print()
+            print(f"\nYour original number {original_number} in base {original_base} is {from_decimal(to_decimal(original_number, original_base),target_base)} in base {target_base}")
+        again = input("\nWould you like to calculate a different number(yes/no) ")
+        while True:
+            if again == 'yes' or again == 'no':
+                break
+            again = input("Please only input 'yes' or 'no' ")
+        if again == 'no':
+            break
+        continue
 
+    print("\nThanks for connecting with the hexorcist, maybe just google it next time")
