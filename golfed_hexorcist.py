@@ -23,7 +23,7 @@ while True:
     o=l("Alright, well what base is it in?(2-36) ")
     n=l("Well get on with it, what's your number? ")
     t=l("What base would you like to convert to?(2-36) ")
-    z('\nPython scripting your results\n':
+    z('\nPython scripting your results\n'):
     z(f"\nYour original number {n} in base {o} is {p(i(n, o),t)} in base {t}")
     if l("\nWould you like to calculate a different number(yes/no) ") == 'no':
         break
